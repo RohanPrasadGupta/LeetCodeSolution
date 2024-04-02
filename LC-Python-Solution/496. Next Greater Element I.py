@@ -1,19 +1,24 @@
-def nextGreaterElement(nums1,nums2):
-    numDict ={}
-    for i in range(0,len(nums2)):
-        grtNumFound = False
-        for j in range(i+1,len(nums2)):
-            if nums2[j]>nums2[i]:
-                numDict[nums2[i]] = nums2[j]
-                grtNumFound = True
-                break
-        if not grtNumFound:
-            numDict[nums2[i]] = -1
-    
-    for i in range(0,len(nums1)):
-        if nums1[i] in numDict:
-            nums1[i] = numDict[nums1[i]]
-    
-    return nums1
-    
-    
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+
+        res = []
+
+        for num1 in nums1:
+            maxNum = 0
+            numFound = False
+            for i in range(len(nums2)):
+                if nums2[i] == num1:
+                    numFound = True
+                if num1 < nums2[i] and numFound:
+                    maxNum = nums2[i]
+                    res.append(maxNum)
+                    break
+            if maxNum == 0:
+                res.append(-1)
+        
+        return res
+
+
+
+
+        
